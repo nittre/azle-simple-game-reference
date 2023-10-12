@@ -1,0 +1,19 @@
+service: () -> {
+    addAdmin: (text) -> (bool);
+    allState: () -> (vec record {balance:nat64; address:text; allowances:vec record {amount:nat64; spender:text}}) query;
+    allowance: (text, text) -> (nat64) query;
+    allowanceFrom: (text) -> (nat64) query;
+    approve: (text, nat64) -> (bool);
+    balanceOf: (text) -> (nat64) query;
+    burn: (text, nat64) -> (bool);
+    deleteAdmin: (text) -> (bool);
+    getAdmins: () -> (vec text) query;
+    initialize: (text, text, nat64) -> (text);
+    mint: (text, nat64) -> (bool);
+    name: () -> (text) query;
+    owner: () -> (text) query;
+    ticker: () -> (text) query;
+    totalSupply: () -> (nat64) query;
+    transfer: (text, nat64) -> (bool);
+    transferFrom: (text, text, nat64) -> (bool);
+}
