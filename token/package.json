@@ -10,6 +10,6 @@
     "canister_call_set_message": "dfx canister call erc20 setMessage '(\"Hello world!\")'"
   },
   "dependencies": {
-    "azle": "0.17.1"
+    "azle": "0.18.2"
   }
 }
