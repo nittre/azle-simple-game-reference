@@ -1,38 +1,11 @@
-type Battle = record {
-  id : text;
-  betAmount : nat64;
-  battleAdmin : text;
-  winner : CharacterInBattle;
-  characters : vec Character;
-  results : vec CharacterInBattle;
-  maxParticipantAmount : nat16;
-};
-type BattleDisplay = record {
-  id : text;
-  betAmount : nat64;
-  characters : vec Character;
-  maxParticipantAmount : nat16;
-};
-type Character = record {
-  owner : text;
-  retryCount : nat64;
-  battleHistory : vec text;
-};
-type CharacterInBattle = record {
-  result : float64;
-  owner : text;
-  gameResults : vec float64;
-  approved : bool;
-};
-service : () -> {
-  createBattle : (nat64, nat16) -> (bool);
-  createCharacter : () -> (bool);
-  endBattle : (text) -> (bool);
-  enterBattle : (text) -> (bool);
-  getBattleByUuid : (text) -> (Battle) query;
-  getCharacterByOwner : (text) -> (Character) query;
-  getRandomNumber : () -> (float64);
-  initialize : (text) -> (bool);
-  openedBattles : () -> (vec BattleDisplay) query;
-  upgradeRetryCountWithTokens : (nat16) -> (bool);
+service: () -> {
+    createBattle: (nat64, nat16) -> (bool);
+    createCharacter: () -> (bool);
+    endBattle: (text) -> (record {id:text; betAmount:nat64; battleAdmin:text; winner:record {result:nat16; owner:text; gameResults:vec nat16; approved:bool}; characters:vec record {owner:text; retryCount:nat64; battleHistory:vec text}; results:vec record {result:nat16; owner:text; gameResults:vec nat16; approved:bool}; maxParticipantAmount:nat16});
+    enterBattle: (text) -> (bool);
+    getBattleByUuid: (text) -> (record {id:text; betAmount:nat64; battleAdmin:text; winner:record {result:nat16; owner:text; gameResults:vec nat16; approved:bool}; characters:vec record {owner:text; retryCount:nat64; battleHistory:vec text}; results:vec record {result:nat16; owner:text; gameResults:vec nat16; approved:bool}; maxParticipantAmount:nat16}) query;
+    getCharacterByOwner: (text) -> (record {owner:text; retryCount:nat64; battleHistory:vec text}) query;
+    initialize: (text) -> (bool);
+    openedBattles: () -> (vec record {id:text; betAmount:nat64; battleAdmin:text; characters:vec record {owner:text; retryCount:nat64; battleHistory:vec text}; results:vec record {result:nat16; owner:text; gameResults:vec nat16; approved:bool}; maxParticipantAmount:nat16}) query;
+    upgradeRetryCountWithTokens: (nat16) -> (bool);
 }
